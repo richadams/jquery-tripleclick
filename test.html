@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>event:tripleclick</title>
+    <meta charset="utf-8" />
+    
+    <style>
+    .events div {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        float: left;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .events #one {
+        background: #f00;
+    }
+
+    .events #two {
+        background: #0f0;
+    }
+
+    .events #debug {
+        clear: both;
+        background: #000;
+        color: #fff;
+        width: 100%;
+        display: block;
+        margin-top: 2em;
+        min-height: 100px;
+        padding-bottom: 1em;
+        font-family: monospace;
+    }
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="tripleclick.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    $(function() 
+    {
+        $("#one").bind("tripleclick", function() { $("#debug").append("\ntripleclick on ONE"); });    
+        $("#two").on("tripleclick", function()   { $("#debug").append("\ntripleclick on TWO"); });    
+    });
+    </script>
+</head>
+<body class="events">
+    <div id="one">ONE</div>
+    <div id="two">TWO</div>
+    <pre id="debug"></pre>
+</body>
+</html>
