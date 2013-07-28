@@ -4,12 +4,17 @@
 
 ;(function($)
 {
-
-    $.tripleclickThreshold = 1000;
+    // Default options
+    var defaults = {
+        threshold: 1000, // ms
+    }
 
     function tripleHandler(event)
     {
         var $elem = jQuery(this);
+
+        // Merge the defaults and any user defined settings.
+        settings = jQuery.extend({}, defaults, event.data);
 
         // Get current values, or 0 if they don't yet exist.
         var clicks = $elem.data("triclick_clicks") || 0;
@@ -20,7 +25,7 @@
 
         // If we have a start time, check it's within limit
         if (start != 0
-            && event.timeStamp > start + $.tripleclickThreshold)
+            && event.timeStamp > start + settings.threshold)
         {
             // Tri-click failed, took too long.
             clicks = 0;
@@ -54,11 +59,11 @@
     {
         setup: function(data, namespaces)
         {
-            $(this).bind("touchstart click.triple", tripleHandler);
+            $(this).bind("touchstart click.triple", data, tripleHandler);
         },
         teardown: function(namespaces)
         {
-            $(this).unbind("touchstart click.triple", tripleHandler);
+            $(this).unbind("touchstart click.triple", data, tripleHandler);
         }
     };
 })(jQuery);

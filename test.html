@@ -3,7 +3,7 @@
 <head>
     <title>event:tripleclick</title>
     <meta charset="utf-8" />
-    
+
     <style>
     .events div {
         width: 100px;
@@ -22,6 +22,10 @@
         background: #0f0;
     }
 
+    .events #three {
+        background: #00f;
+    }
+
     .events #debug {
         clear: both;
         background: #000;
@@ -34,21 +38,23 @@
         font-family: monospace;
     }
     </style>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <script src="tripleclick.js" type="text/javascript"></script>
 
     <script type="text/javascript">
     $(function() 
     {
-        $("#one").bind("tripleclick", function() { $("#debug").append("\ntripleclick on ONE"); });    
-        $("#two").on("tripleclick", function()   { $("#debug").append("\ntripleclick on TWO"); });    
+        $("#one").bind("tripleclick", function() { $("#debug").append("\ntripleclick on ONE"); });
+        $("#two").on("tripleclick", function()   { $("#debug").append("\ntripleclick on TWO"); });
+        $("#three").on("tripleclick",{ threshold: 5000 }, function()   { $("#debug").append("\ntripleclick on THREE"); });
     });
     </script>
 </head>
 <body class="events">
     <div id="one">ONE</div>
     <div id="two">TWO</div>
+    <div id="three">THREE</div>
     <pre id="debug"></pre>
 </body>
 </html>
