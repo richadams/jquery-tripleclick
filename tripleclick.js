@@ -4,6 +4,9 @@
 
 ;(function($)
 {
+
+    $.tripleclickThreshold = 1000;
+
     function tripleHandler(event)
     {
         var $elem = jQuery(this);
@@ -17,7 +20,7 @@
 
         // If we have a start time, check it's within limit
         if (start != 0
-            && event.timeStamp > start + 1000)
+            && event.timeStamp > start + $.tripleclickThreshold)
         {
             // Tri-click failed, took too long.
             clicks = 0;
@@ -33,7 +36,13 @@
             event.type = "tripleclick";
 
             // Let jQuery handle the triggering of "tripleclick" event handlers
-            jQuery.event.handle.apply(this, arguments);
+            if (jQuery.event.handle === undefined) {
+                jQuery.event.dispatch.apply(this, arguments);
+            }
+            else {
+                // for jQuery before 1.9
+                jQuery.event.handle.apply(this, arguments);
+            }
         }
 
         // Update object data
