@@ -63,7 +63,7 @@
         },
         teardown: function(namespaces)
         {
-            $(this).unbind("touchstart click.triple", data, tripleHandler);
+            $(this).unbind("touchstart click.triple", tripleHandler);
         }
     };
 })(jQuery);
